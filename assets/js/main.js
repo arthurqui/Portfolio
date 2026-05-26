@@ -233,6 +233,23 @@
     }
   });
 
+  const certificadosTotalHoras = select('#certificados-total-horas')
+  if (certificadosTotalHoras) {
+    let somaHoras = 0
+    const cargasHorarias = select('#certificados .swiper-wrapper h6', true)
+
+    cargasHorarias.forEach((item) => {
+      const texto = item.textContent || ''
+      const resultado = texto.match(/(\d+)\s*hora/i)
+      if (resultado) {
+        somaHoras += parseInt(resultado[1], 10)
+      }
+    })
+
+    const sufixo = somaHoras === 1 ? 'hora' : 'horas'
+    certificadosTotalHoras.innerHTML = '<strong>Total de horas em certificados: ' + somaHoras + ' ' + sufixo + '</strong>'
+  }
+
   /**
    * Animation on scroll
    */
